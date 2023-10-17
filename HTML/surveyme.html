@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Modern Survey Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input[type="text"],
+      select,
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      .btn:hover {
+        background-color: #3e8e41;
+      }
+      .btn-secondary {
+        background-color: #9E9E9E;
+      }
+      .btn-secondary:hover {
+        background-color: #757575;
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+      @media screen and (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+        input[type="text"],
+        select,
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"] {
+          font-size: 14px;
+        }
+        .btn {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(3, 0, 95);">
+    <div class="container">
+      <h1>Customer Survey Form</h1>
+      <form id="survey-form">
+        <div class="form-group">
+          <label for="first-name">First Name *</label>
+          <input type="text" id="first-name" name="first-name" required>
+          <div class="error" id="first-name-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="last-name">Last Name *</label>
+          <input type="text" id="last-name" name="last-name" required>
+          <div class="error" id="last-name-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="date-of-birth">Date of Birth *</label>
+          <input type="date" id="date-of-birth" name="date-of-birth" required>
+          <div class="error" id="date-of-birth-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country *</label>
+          <select id="country" name="country" required>
+            <option value="">Select a country</option>
+            <option value="USA">India</option>
+            <option value="Canada">Canada</option>
+            <option value="Mexico">USA</option>
+          </select>
+          <div class="error" id="country-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Gender *</label>
+          <div class="input-group">
+            <input type="radio" id="male" name="gender" value="male">Male
+            <input type="radio" id="female" name="gender" value="female">Female
+            <input type="radio" id="other" name="gender" value="other" class="checkbox-label">Other
+          <div class="error" id="gender-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="profession">Profession *</label>
+          <input type="text" id="profession" name="profession" required>
+          <div class="error" id="profession-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+          <div class="error" id="email-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number *</label>
+          <input type="tel" id="mobile" name="mobile" required>
+          <div class="error" id="mobile-error"></div>
+        </div>
+
+        <div>
+          <button type="submit" class="btn">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("survey-form");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const dateOfBirth = document.getElementById("date-of-birth").value;
+        const genderInputs = document.querySelectorAll('input[name="gender"]');
+        const selectedGenderInputs = Array.from(genderInputs).filter((input) => input.checked);
+        const country = document.getElementById("country").value;
+        const profession = document.getElementById("profession").value;
+        const email = document.getElementById("email").value;
+        const mobile = document.getElementById("mobile").value;
+
+        const firstNameError = document.getElementById("first-name-error");
+        const lastNameError = document.getElementById("last-name-error");
+        const dateOfBirthError = document.getElementById("date-of-birth-error");
+        const genderError = document.getElementById("gender-error");
+        const countryError = document.getElementById("country-error");
+        const professionError = document.getElementById("profession-error");
+        const emailError = document.getElementById("email-error");
+        const mobileError = document.getElementById("mobile-error");
+
+        firstNameError.textContent = "";
+        lastNameError.textContent = "";
+        dateOfBirthError.textContent = "";
+        genderError.textContent = "";
+        countryError.textContent = "";
+        professionError.textContent = "";
+        emailError.textContent = "";
+        mobileError.textContent = "";
+
+        if (firstName === "") {
+          firstNameError.textContent = "Please enter your first name.";
+        }
+
+        if (lastName === "") {
+          lastNameError.textContent = "Please enter your last name.";
+        }
+
+        if (dateOfBirth === "") {
+          dateOfBirthError.textContent = "Please enter your date of birth.";
+        }
+
+        if (selectedGenderInputs.length === 0) {
+          genderError.textContent = "Please select at least one gender option.";
+        }
+
+        if (country === "") {
+          countryError.textContent = "Please select your country.";
+        }
+
+        if (profession === "") {
+          professionError.textContent = "Please enter your profession.";
+        }
+
+        if (email === "") {
+          emailError.textContent = "Please enter your email address.";
+        } else if (!isValidEmail(email)) {
+          emailError.textContent = "Please enter a valid email address.";
+        }
+
+        if (mobile === "") {
+          mobileError.textContent = "Please enter your mobile number.";
+        } else if (!isValidMobile(mobile)) {
+          mobileError.textContent = "Please enter a valid mobile number.";
+        }
+
+        if (
+          firstName !== "" &&
+          lastName !== "" &&
+          dateOfBirth !== "" &&
+          selectedGenderInputs.length > 0 &&
+          country !== "" &&
+          profession !== "" &&
+          email !== "" &&
+          isValidEmail(email) &&
+          mobile !== "" &&
+          isValidMobile(mobile)
+        ) {
+          const gender = selectedGenderInputs.map((input) => {
+            const label = input.nextElementSibling;
+            return label.textContent;
+          }).join(", ");
+
+          const message = `
+            First Name: ${firstName}
+            Last Name: ${lastName}
+            Date of Birth: ${dateOfBirth}
+            Gender: ${gender}
+            Country: ${country}
+            Profession: ${profession}
+            Email: ${email}
+            Mobile Number: ${mobile}
+          `;
+
+          alert(message);
+
+          form.reset();
+        }
+      });
+
+      function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function isValidMobile(mobile) {
+        const mobileRegex = /^\d{10}$/;
+        return mobileRegex.test(mobile);
+      }
+    </script>
+  </body>
+</html>
